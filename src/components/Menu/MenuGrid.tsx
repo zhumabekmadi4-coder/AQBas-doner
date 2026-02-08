@@ -70,7 +70,7 @@ export default function MenuGrid({
                             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-brand-red/30" />
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                             {grouped.map((group) => (
                                 <motion.div
                                     key={group.baseName}
@@ -79,8 +79,8 @@ export default function MenuGrid({
                                     viewport={{ once: true }}
                                     className="glass-card overflow-hidden rounded-3xl group"
                                 >
-                                    <div className="flex flex-col md:flex-row h-full">
-                                        <div className="w-full md:w-2/5 relative h-48 md:h-auto overflow-hidden">
+                                    <div className="flex flex-row md:flex-row h-full">
+                                        <div className="w-1/3 md:w-2/5 relative h-auto overflow-hidden">
                                             <img
                                                 src={group.image}
                                                 alt={group.baseName}
@@ -89,40 +89,40 @@ export default function MenuGrid({
                                             <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent md:hidden" />
                                         </div>
 
-                                        <div className="flex-1 p-8 flex flex-col justify-between bg-gradient-to-br from-zinc-900/50 to-transparent">
+                                        <div className="flex-1 p-4 md:p-8 flex flex-col justify-between bg-gradient-to-br from-zinc-900/50 to-transparent">
                                             <div>
-                                                <h4 className="text-2xl font-black uppercase italic mb-2 tracking-tight group-hover:text-brand-red transition-colors">
+                                                <h4 className="text-lg md:text-2xl font-black uppercase italic mb-1 md:mb-2 tracking-tight group-hover:text-brand-red transition-colors">
                                                     {group.baseName}
                                                 </h4>
-                                                <p className="text-zinc-500 text-sm mb-6 font-medium line-clamp-2">
+                                                <p className="hidden md:block text-zinc-500 text-sm mb-6 font-medium line-clamp-2">
                                                     Традиционный рецепт на открытом огне с фирменным соусом.
                                                 </p>
                                             </div>
 
-                                            <div className="space-y-3">
+                                            <div className="space-y-2 md:space-y-3">
                                                 {group.variants.map((variant) => (
                                                     <div
                                                         key={variant.id}
-                                                        className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all group/variant"
+                                                        className="flex items-center justify-between p-2 md:p-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all group/variant"
                                                     >
                                                         <div className="flex flex-col">
-                                                            <span className="text-xs font-black uppercase text-zinc-500 group-hover/variant:text-white transition-colors">
+                                                            <span className="text-[10px] md:text-xs font-black uppercase text-zinc-500 group-hover/variant:text-white transition-colors">
                                                                 {variant.name.includes('г') ? variant.name.match(/\d+г|50\/50|75\/75/)?.[0] : 'Стандарт'}
                                                             </span>
-                                                            <span className="text-lg font-bold">₸{variant.price.toLocaleString()}</span>
+                                                            <span className="text-sm md:text-lg font-bold">₸{variant.price.toLocaleString()}</span>
                                                         </div>
                                                         <button
-                                                            onClick={() => {
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
                                                                 if (variant.category === "Doner" || variant.category === "Burger") {
                                                                     onSelectItem(variant);
                                                                 } else {
-                                                                    // For Snacks and Drinks, add to cart immediately with empty mods
                                                                     addItem(variant, []);
                                                                 }
                                                             }}
-                                                            className="bg-brand-red text-white p-3 rounded-lg hover:bg-white hover:text-black transition-all active:scale-90"
+                                                            className="bg-brand-red text-white p-2 md:p-3 rounded-lg hover:bg-white hover:text-black transition-all active:scale-90"
                                                         >
-                                                            <Plus size={20} />
+                                                            <Plus size={16} className="md:w-5 md:h-5" />
                                                         </button>
                                                     </div>
                                                 ))}

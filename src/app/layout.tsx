@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Playfair_Display_SC, Karla } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const playfair = Playfair_Display_SC({
+    weight: ['400', '700'],
+    subsets: ["latin", "cyrillic"],
+    variable: '--font-playfair'
+});
+
+const karla = Karla({
+    subsets: ["latin", "latin-ext"],
+    variable: '--font-karla'
+});
 
 export const metadata: Metadata = {
     title: "AQBas - Meat & Fire",
@@ -15,8 +24,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="ru" className="scroll-smooth">
-            <body className={`${inter.className} bg-black text-white antialiased selection:bg-brand-red/30`}>
+        <html lang="ru" className={`scroll-smooth ${playfair.variable} ${karla.variable}`}>
+            <body className={`${karla.className} bg-black text-white antialiased selection:bg-brand-red/30`}>
                 <div className="fixed inset-0 pointer-events-none z-50 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
                 {children}
             </body>
